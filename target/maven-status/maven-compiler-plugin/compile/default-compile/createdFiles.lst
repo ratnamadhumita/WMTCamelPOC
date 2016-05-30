@@ -1,0 +1,10 @@
+com\wmt\controller\CurrencyControllerImpl.class
+com\wmt\service\RouteService.class
+com\wmt\controller\CurrencyController.class
+com\wmt\service\RouteServiceImpl.class
+com\wmt\controller\CustomCurrencyControllerImpl.class
+com\wmt\application\Application.class
+com\wmt\processors\CustomProcessor.class
+com\wmt\controller\CustomCurrencyController.class
+com\wmt\vo\CurrencyVO.class
+com\wmt\camel\route\CurrencyRoute.class

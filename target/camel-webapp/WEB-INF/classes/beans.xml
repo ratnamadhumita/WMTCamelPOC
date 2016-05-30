@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://camel.apache.org/schema/cxf 
+			http://camel.apache.org/schema/cxf/camel-cxf.xsd
+			http://camel.apache.org/schema/spring 
+			http://camel.apache.org/schema/spring/camel-spring.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/util 
+			http://www.springframework.org/schema/util/spring-util.xsd
+			http://cxf.apache.org/jaxrs
+ 			http://cxf.apache.org/schemas/jaxrs.xsd">
+ 
+	
+  <import resource="classpath:META-INF/cxf/cxf.xml" />
+  <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	
+	<bean id="routeService" class="com.wmt.service.RouteServiceImpl" />
+	<bean id="currencyServiceBean" class="com.wmt.controller.CurrencyControllerImpl" />
+	<bean id="customCurrencyServiceBean" class="com.wmt.controller.CustomCurrencyControllerImpl" />
+	<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider"/>
+	<bean id="customProcessor" class="com.wmt.processors.CustomProcessor" />
+	<bean id="loggingFeature" class="org.apache.cxf.feature.LoggingFeature" />
+ 
+ 	<!-- Defined the real JAXRS back end service  -->
+ 	
+ 	
+ <!--  <jaxrs:server id="restService"
+                address="/client" 
+                staticSubresourceResolution="true">
+    <jaxrs:serviceBeans>
+      <ref bean="customCurrencyServiceBean"/>
+    </jaxrs:serviceBeans>  
+    
+    <jaxrs:features> 
+		<ref bean="loggingFeature" /> 
+ 	</jaxrs:features>
+ 	 
+    <jaxrs:providers>
+    	 <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+    </jaxrs:providers>    
+  </jaxrs:server>
+  -->
+  
+ 	<cxf:rsServer id="currencyService" address="/currencyGeneric"
+    loggingFeatureEnabled="true" loggingSizeLimit="20"  serviceClass="com.wmt.controller.CurrencyControllerImpl">
+    
+	    <cxf:features> 
+			<ref bean="loggingFeature" /> 
+	 	</cxf:features>
+	 	 <!-- 
+	    <cxf:providers>
+	    	 <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+	    </cxf:providers>
+	     --> 
+  </cxf:rsServer>
+  
+   <!-- Defined the client endpoint to create the cxf-rs consumer -->
+  <cxf:rsClient id="currencyServiceClientEUR" address="http://localhost:8091/client/currencyEUR" 
+    loggingFeatureEnabled="true" loggingSizeLimit="20" serviceClass="com.wmt.controller.CustomCurrencyControllerImpl">
+  		<cxf:features> 
+			<ref bean="loggingFeature" /> 
+	 	</cxf:features>
+	 	 
+	    <cxf:providers>
+	    	 <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+	    </cxf:providers> 
+  </cxf:rsClient>
+  
+   <!-- Defined the client endpoint to create the cxf-rs consumer -->
+  <cxf:rsClient id="currencyServiceClientUSA" address="http://localhost:8091/client/currencyUSA" 
+    loggingFeatureEnabled="true" loggingSizeLimit="20">
+   		 <cxf:features> 
+			<ref bean="loggingFeature" /> 
+	 	</cxf:features>
+	 	 
+	    <cxf:providers>
+	    	 <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+	    </cxf:providers> 
+  </cxf:rsClient>
+  
+   <!-- Defined the client endpoint to create the cxf-rs consumer -->
+  <cxf:rsClient id="currencyServiceClient" address="http://localhost:8091/client/currencyDefault" 
+    loggingFeatureEnabled="true" loggingSizeLimit="20" serviceClass="com.wmt.controller.CustomCurrencyControllerImpl">
+  		 <cxf:features> 
+			<ref bean="loggingFeature" /> 
+	 	</cxf:features>
+	 	 
+	    <cxf:providers>
+	    	 <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+	    </cxf:providers> 
+  </cxf:rsClient>
+  	
+  <!--  
+  <cxf:rsServer id="customcurrencyService" address="/customcurrency"
+    loggingFeatureEnabled="true" loggingSizeLimit="20"  serviceClass="com.wmt.controller.CustomCurrencyController">
+    <cxf:providers>
+       <ref bean="jsonProvider"/>
+    </cxf:providers>
+  </cxf:rsServer>
+  -->
+
+ <!--
+	<bean
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+                    <property name="objectMapper" ref="jacksonObjectMapper" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+   
+    
+      <jaxrs:server id="jsonService" address="/currency">
+	    <jaxrs:providers>
+	        <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+	    </jaxrs:providers>
+	</jaxrs:server>
+	    
+	    
+     <message-converters>
+        <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+        <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+        <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+    </message-converters>
+     --> 
+ 
+</beans>
+
+
