@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: camel-webapp
-Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: 341249
-Implementation-Vendor-Id: org.wmt.poc
-Build-Jdk: 1.8.0_74
-Created-By: Maven Integration for Eclipse
-Implementation-Vendor: Pivotal Software, Inc.
-

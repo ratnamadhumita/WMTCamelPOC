@@ -22,13 +22,16 @@ public class CustomProcessor implements Processor {
 
 	@Override
 	public void process(Exchange exchangeContent) throws Exception {
-		logger.debug(" body is :: " + exchangeContent.getIn().getBody() );
+		
+		String body = exchangeContent.getIn().getBody(String.class);
+		logger.info(" ################################## body is :: " + body);
 		
 		MessageContentsList inMessage = exchangeContent.getIn().getBody(MessageContentsList.class);
 		
-		logger.debug(" inMessage :: " + inMessage);
+		logger.info(" ###############inMessage :: " + inMessage);
 		
-		exchangeContent.getOut().setBody("");
+		exchangeContent.getOut().setBody(inMessage);
+		//logger.info("##########Out " + exchange);
 		
 		Map<String, Object> headerMap = new HashMap<String, Object> ();
 		

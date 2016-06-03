@@ -32,7 +32,7 @@
  	<!-- Defined the real JAXRS back end service  -->
  	
  	
- <!--  <jaxrs:server id="restService"
+  <jaxrs:server id="restService"
                 address="/client" 
                 staticSubresourceResolution="true">
     <jaxrs:serviceBeans>
@@ -47,7 +47,7 @@
     	 <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
     </jaxrs:providers>    
   </jaxrs:server>
-  -->
+ 
   
  	<cxf:rsServer id="currencyService" address="/currencyGeneric"
     loggingFeatureEnabled="true" loggingSizeLimit="20"  serviceClass="com.wmt.controller.CurrencyControllerImpl">
@@ -62,8 +62,20 @@
 	     --> 
   </cxf:rsServer>
   
-   <!-- Defined the client endpoint to create the cxf-rs consumer -->
-  <cxf:rsClient id="currencyServiceClientEUR" address="http://localhost:8091/client/currencyEUR" 
+ 
+ <cxf:rsClient id="currencyServiceClientNew" address="http://localhost:8091/client/currencyGeneric2" 
+    loggingFeatureEnabled="true" loggingSizeLimit="20" serviceClass="com.wmt.controller.CustomCurrencyControllerImpl">
+  		<cxf:features> 
+			<ref bean="loggingFeature" /> 
+	 	</cxf:features>
+	 	 
+	    <cxf:providers>
+	    	 <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+	    </cxf:providers> 
+  </cxf:rsClient>
+<!--  Commented by MAdhumita
+
+ <cxf:rsClient id="currencyServiceClientEUR" address="http://localhost:8091/client/currencyEUR" 
     loggingFeatureEnabled="true" loggingSizeLimit="20" serviceClass="com.wmt.controller.CustomCurrencyControllerImpl">
   		<cxf:features> 
 			<ref bean="loggingFeature" /> 
@@ -74,9 +86,9 @@
 	    </cxf:providers> 
   </cxf:rsClient>
   
-   <!-- Defined the client endpoint to create the cxf-rs consumer -->
+
   <cxf:rsClient id="currencyServiceClientUSA" address="http://localhost:8091/client/currencyUSA" 
-    loggingFeatureEnabled="true" loggingSizeLimit="20">
+    loggingFeatureEnabled="true" loggingSizeLimit="20" serviceClass="com.wmt.controller.CustomCurrencyControllerImpl">
    		 <cxf:features> 
 			<ref bean="loggingFeature" /> 
 	 	</cxf:features>
@@ -86,7 +98,7 @@
 	    </cxf:providers> 
   </cxf:rsClient>
   
-   <!-- Defined the client endpoint to create the cxf-rs consumer -->
+
   <cxf:rsClient id="currencyServiceClient" address="http://localhost:8091/client/currencyDefault" 
     loggingFeatureEnabled="true" loggingSizeLimit="20" serviceClass="com.wmt.controller.CustomCurrencyControllerImpl">
   		 <cxf:features> 
@@ -96,8 +108,8 @@
 	    <cxf:providers>
 	    	 <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
 	    </cxf:providers> 
-  </cxf:rsClient>
-  	
+  </cxf:rsClient> -->
+
   <!--  
   <cxf:rsServer id="customcurrencyService" address="/customcurrency"
     loggingFeatureEnabled="true" loggingSizeLimit="20"  serviceClass="com.wmt.controller.CustomCurrencyController">

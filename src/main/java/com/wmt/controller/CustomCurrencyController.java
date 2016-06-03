@@ -20,7 +20,7 @@ import com.wmt.vo.CurrencyVO;
 @Component	
 public interface CustomCurrencyController  {
 	
-	@POST
+/*	@POST
 	@Path("/currencyEUR")
 	@Produces(MediaType.APPLICATION_JSON)
 	public CurrencyVO getCurrencyEUR ();
@@ -34,7 +34,12 @@ public interface CustomCurrencyController  {
 	@POST
 	@Path("/currencyDefault")
 	@Produces(MediaType.APPLICATION_JSON)
-    public CurrencyVO getCurrencyDefault( );
+    public CurrencyVO getCurrencyDefault( );*/
+	
+	@POST
+	@Path("/currencyGeneric2")
+	@Produces(MediaType.APPLICATION_JSON)
+    public CurrencyVO getCurrencyNew(String country);
 
 	
 }

@@ -25,7 +25,10 @@ public class CustomCurrencyControllerImpl  implements CustomCurrencyController {
 	
 	private static Logger logger = Logger.getLogger (CustomCurrencyControllerImpl.class);
 
-	@POST
+/*
+ * Added by Madhumita
+ * 
+ * 	@POST
 	@Path("/currencyEUR")
 	@Produces(MediaType.APPLICATION_JSON)
 	public CurrencyVO getCurrencyEUR ( ) {
@@ -72,17 +75,20 @@ public class CustomCurrencyControllerImpl  implements CustomCurrencyController {
 		
 		 return crcyVO;
     }
-
-	@GET
-	@Path("/currencyGeneric")
+*/
+	@POST
+	@Path("/currencyGeneric2")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getCurrency ( @QueryParam("country") String country ) {
+	public CurrencyVO getCurrencyNew ( @QueryParam("country") String country ) {
 		
-		logger.info(" getCurrency :: " + country);
+		logger.info(" %%%%%%%%%%%%%%% getCurrency :: " + country);
+		logger.info (" CurrencyController  curreny  "  + country);
+		CurrencyVO crcyVO = new CurrencyVO (country, country);
 		
 		
-		return country;
+		return crcyVO;
 	}
+
 	
 
 	

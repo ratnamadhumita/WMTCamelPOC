@@ -40,7 +40,8 @@ public class CurrencyRoute extends RouteBuilder {
 		.setExchangePattern(ExchangePattern.InOut)
 		//from("direct:start")
 		.log("Processing of ${body} done")
-			.choice()
+			/*Added by MAdhumita
+			 * .choice()
 				.when(simple("${body} contains 'USA'"))
 							//	.to("bean:routeService?method=getCurrencyUSA")
 								//.log("to Currency USA")
@@ -69,7 +70,9 @@ public class CurrencyRoute extends RouteBuilder {
 							.to("cxfrs:bean:currencyServiceClient")
 							//.to("http://localhost:8091/client/currencyDefault")
 			.end();
+		*/
 		
+		.process(new CustomProcessor()).setExchangePattern(ExchangePattern.InOut).to("cxfrs:bean:currencyServiceClientNew");
 		
 	}
 
