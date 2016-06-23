@@ -2,9 +2,11 @@ package com.wmt.camel.route;
 
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import com.wmt.controller.CustomCurrencyControllerImpl;
 import com.wmt.processors.CustomProcessor;
 
 @Component
@@ -20,6 +22,10 @@ public class CurrencyRoute extends RouteBuilder {
 	public void configure() throws Exception {
 		
 		logger.debug(" **************   CurrencyRoute configure  **************   ");
+		
+		//CustomCurrencyControllerImpl cl = new CustomCurrencyControllerImpl();
+		
+		//cl.setInfo("");
 		
 		//restConfiguration().component("restlet");
 		//rest("/").get("currreny").to("direct:routeservice");
@@ -72,7 +78,22 @@ public class CurrencyRoute extends RouteBuilder {
 			.end();
 		*/
 		
-		.process(new CustomProcessor()).setExchangePattern(ExchangePattern.InOut).to("cxfrs:bean:currencyServiceClientNew");
+		.process(new CustomProcessor() )
+			.log("1111########## after Processer ---->>>>Processing of ${body} done")
+			//.transform(simple("${body[0]}"))
+			//.choice()
+				//.when(simple("${body} contains 'USA'"))
+					.setExchangePattern(ExchangePattern.InOut)
+					//.to("http://localhost:8091/client/rest/currencyUSA");
+					//.log("to Currency USA")
+				//.when(simple("${body} contains 'INDIA'"))
+					//.setExchangePattern(ExchangePattern.InOut)
+					//.to("http://localhost:8091/client/rest/currencyGeneric")
+					//.log("to Currency INDIA")
+				//.otherwise()
+					//.setExchangePattern(ExchangePattern.InOut)
+					.to("cxfrs:bean:currencyServiceClient");
+					//.log("otherwise to Currency INDIA");
 		
 	}
 

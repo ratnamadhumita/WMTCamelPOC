@@ -46,7 +46,21 @@
     <jaxrs:providers>
     	 <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
     </jaxrs:providers>    
+    
   </jaxrs:server>
+  
+   	<!--  <cxf:rsServer id="restService" address="/client"
+    loggingFeatureEnabled="true" loggingSizeLimit="20"  serviceClass="com.wmt.controller.CustomCurrencyControllerImpl">
+    
+	    <cxf:features> 
+			<ref bean="loggingFeature" /> 
+	 	</cxf:features>
+	 	
+	    <cxf:providers>
+	    	 <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+	    </cxf:providers>
+	    
+  </cxf:rsServer> -->
  
   
  	<cxf:rsServer id="currencyService" address="/currencyGeneric"
@@ -55,15 +69,15 @@
 	    <cxf:features> 
 			<ref bean="loggingFeature" /> 
 	 	</cxf:features>
-	 	 <!-- 
+	 	<!--
 	    <cxf:providers>
 	    	 <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
 	    </cxf:providers>
-	     --> 
+	    -->
   </cxf:rsServer>
   
  
- <cxf:rsClient id="currencyServiceClientNew" address="http://localhost:8091/client/currencyGeneric2" 
+  <cxf:rsClient id="currencyServiceClient" address="http://localhost:8091/client/rest/currencyGeneric" 
     loggingFeatureEnabled="true" loggingSizeLimit="20" serviceClass="com.wmt.controller.CustomCurrencyControllerImpl">
   		<cxf:features> 
 			<ref bean="loggingFeature" /> 
@@ -73,6 +87,26 @@
 	    	 <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
 	    </cxf:providers> 
   </cxf:rsClient>
+  
+  	<!-- <jaxrs-client:client id="restClient" address="http://localhost:8091/client/currencyGeneric2/indiaaa"  
+		serviceClass="org.apache.camel.example.cxfrs.client.CountryResource" >
+		<jaxrs-client:features>
+			<ref bean="loggingFeature" />
+		</jaxrs-client:features>
+        <jaxrs-client:headers>
+             <entry key="Charset" value="UTF-8"/>
+             <entry key="Accept" value="application/json"/>
+        </jaxrs-client:headers>
+        <jaxrs-client:providers>
+			<bean id="jsonDataProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
+		</jaxrs-client:providers>
+	</jaxrs-client:client>  -->
+  
+  <!-- <cxf:rsServer id="currencyServiceClientNew" address="http://localhost:8091/client/currencyGeneric2" loggingFeatureEnabled="true" loggingSizeLimit="20">
+    <cxf:serviceBeans >
+      <ref bean="customCurrencyServiceBean"/>
+    </cxf:serviceBeans>
+  </cxf:rsServer>-->
 <!--  Commented by MAdhumita
 
  <cxf:rsClient id="currencyServiceClientEUR" address="http://localhost:8091/client/currencyEUR" 

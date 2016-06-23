@@ -8,3 +8,4 @@ com\wmt\processors\CustomProcessor.class
 com\wmt\controller\CustomCurrencyController.class
 com\wmt\vo\CurrencyVO.class
 com\wmt\camel\route\CurrencyRoute.class
+com\wmt\vo\Country.class
