@@ -22,7 +22,8 @@ public class CustomProcessor implements Processor {
 		
 		//Country myPojo= exchangeContent.getIn().getBody(Country .class);
 		
-		Object body = exchangeContent.getIn().getBody(String.class);
+		//Object body = exchangeContent.getIn().getBody(String.class);
+		Object body = exchangeContent.getIn().getBody(Country .class);
 		logger.info(" ##################################>>>>>>>>>>>>>>>> body is :: " + body);
 		//String cnt = myPojo.getCountry2();
 		//logger.info(" ##################################>>>>>>>>>>>>>>>> country is :: " + cnt);
@@ -30,7 +31,8 @@ public class CustomProcessor implements Processor {
 		
 		//logger.info(" ############### @@@@@@@ inMessage :: " + inMessage);
 		
-		String obj = (String)inMessage.get(0);
+		//String obj = (String)inMessage.get(0);
+		Country obj = (Country)inMessage.get(0);
 		//exchangeContent.getIn().setBody(obj);
 		logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>== " + obj);
 		

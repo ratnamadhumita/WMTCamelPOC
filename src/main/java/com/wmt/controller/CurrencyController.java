@@ -28,12 +28,15 @@ public interface CurrencyController  {
 	public Country getCurrency (Country country );*/
 	
 	
-	@GET
+	/*@GET
 	@Path("/currencyGeneric")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getCurrency ( @QueryParam("country") String country );
+	public String getCurrency ( @QueryParam("country") String country );*/
 	
-
+	@POST
+	@Path("/currencyGeneric")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Country getCurrency ( Country country );
 
 	
 }
